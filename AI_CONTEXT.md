@@ -18,6 +18,7 @@ The primary goals of this project are:
   - **iOS (`ios/Plugin/`):** Swift wrapper around `FBSDKCoreKit` supporting programmatic initialization, `logEvent`, `logPurchase` and `setUserData` via Graph APIs.
   - **Android (`android/src/main/java/`):** Java wrapper utilizing `facebook-core:17.0.0` with mapping handlers.
 - **Code Quality:** Configured Husky (`pre-commit`), `lint-staged` with `eslint` (`@ionic/eslint-config`) and `prettier` (including `prettier-plugin-java`).
+- **CI/CD:** Added GitHub Actions workflows (`.github/workflows`) for `CI` (lint + format + build on PR/main) and `Release` (build + npm publish on GitHub Release tags).
 
 ## Future Steps / Pending Work
 
@@ -25,10 +26,8 @@ If you are initializing a new session to continue work on this plugin, the next 
 
 1. **Local Linking & Testing:** Create a blank Capacitor application (`npx create-capacitor-app`), link this plugin locally (`npm install ../capacitor-meta-sdk`), run it on an Xcode iOS simulator and Android Studio emulator to trace graph API requests.
 2. **Automated Testing:** Setting up unit tests using Jest/Karma to verify the web bridging wrapper behaves as expected.
-3. **Continuous Integration:** Creating `.github/workflows` to test builds and verify code quality out of the box.
 
 ## Useful Commands
 
 - `npm run build` - Cleans and compiles the TS definitions into Rollup bundles.
 - `npm run lint` - Executes ESLint rules.
-- `npm run fmt` - Executes Prettier rules across all web and java platforms.

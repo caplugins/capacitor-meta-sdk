@@ -57,19 +57,27 @@ In your `android/app/src/main/res/values/strings.xml`, define the values:
 
 _Note: You can also inject these into `strings.xml` or via `manifestPlaceholders` in `build.gradle` using environment variables._
 
+## CI/CD and Publishing
+
+This project includes fully configured GitHub Actions workflows for continuous integration and deployment.
+
+- **CI:** Automatically runs `npm run fmt`, `npm run lint`, and `npm run build` on every Pull Request and push to `main` to catch regressions.
+- **Publishing:** Whenever a new GitHub Release is published (e.g., `v1.0.1`), the `release` workflow will automatically build and publish the package to NPM.
+  - _Requirement:_ Ensure you have configured an NPM authentication token as a GitHub repository secret named `NPM_TOKEN`.
+
 ## API Usage
 
 1. **Initialization:**
    Call this as early as possible in your app lifecycle. You can optionally disable tracking on certain platforms (e.g., when running in a local web browser simulator that blocks scripts).
 
 ```typescript
-import { MetaSDK } from "@capplugins/capacitor-meta-sdk";
+import { MetaSDK } from '@capplugins/capacitor-meta-sdk';
 
 // Initialize the SDK
 await MetaSDK.initialize({
   appId: process.env.VITE_META_APP_ID, // Use environment variables!
   clientToken: process.env.VITE_META_CLIENT_TOKEN,
-  disabledPlatforms: ["web"], // Disable the web pixel if desired
+  disabledPlatforms: ['web'], // Disable the web pixel if desired
   debug: true,
 });
 ```
@@ -78,7 +86,7 @@ await MetaSDK.initialize({
 
 ```typescript
 await MetaSDK.logEvent({
-  name: "CompletedTutorial",
+  name: 'CompletedTutorial',
   parameters: {
     success: true,
     time_taken: 120,
@@ -91,10 +99,10 @@ await MetaSDK.logEvent({
 ```typescript
 await MetaSDK.logPurchase({
   amount: 29.99,
-  currency: "USD",
+  currency: 'USD',
   parameters: {
-    item_id: "sub_123",
-    tier: "premium",
+    item_id: 'sub_123',
+    tier: 'premium',
   },
 });
 ```
@@ -104,8 +112,8 @@ await MetaSDK.logPurchase({
 
 ```typescript
 await MetaSDK.setUserData({
-  email: "user@example.com",
-  phone: "16505551234",
-  external_id: "user_xyz123",
+  email: 'user@example.com',
+  phone: '16505551234',
+  external_id: 'user_xyz123',
 });
 ```
