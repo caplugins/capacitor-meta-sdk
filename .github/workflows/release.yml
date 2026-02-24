@@ -1,12 +1,15 @@
-name: Release to NPM
+name: Release to GitHub Packages
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -15,7 +18,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
+          registry-url: 'https://npm.pkg.github.com'
           cache: 'npm'
 
       - name: Install Dependencies
@@ -24,7 +27,7 @@ jobs:
       - name: Build Plugin
         run: npm run build
 
-      - name: Publish to NPM
-        run: npm publish --access public
+      - name: Publish to GitHub Packages
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
