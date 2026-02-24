@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.capplugins.metasdk">
+
+    <application>
+        <!-- The host app will provide the Facebook variables, we don't need to define them here. -->
+    </application>
+</manifest>
