@@ -62,8 +62,8 @@ _Note: You can also inject these into `strings.xml` or via `manifestPlaceholders
 This project includes fully configured GitHub Actions workflows for continuous integration and deployment.
 
 - **CI:** Automatically runs `npm run fmt`, `npm run lint`, and `npm run build` on every Pull Request and push to `main` to catch regressions.
-- **Publishing:** Whenever a new GitHub Release is published (e.g., `v1.0.1`), the `release` workflow will automatically build and publish the package to the **GitHub Packages** registry.
-  - _Note:_ The workflow uses the automatically provided `GITHUB_TOKEN` to authenticate. You no longer need a custom `NPM_TOKEN` secret. Ensure your repository settings allow GitHub Actions to _Read and write permissions_.
+- **Publishing:** Whenever a new GitHub Release is published (e.g., `v1.0.1`), the `release` workflow will automatically build and publish the package to NPM using `JS-DevTools/npm-publish`.
+  - _Requirement:_ Ensure you have configured an NPM authentication token as a GitHub repository secret named `NPM_TOKEN`.
 
 ## API Usage
 
