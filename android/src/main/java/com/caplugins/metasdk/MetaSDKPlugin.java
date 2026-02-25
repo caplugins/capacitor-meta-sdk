@@ -128,7 +128,7 @@ public class MetaSDKPlugin extends Plugin {
                 eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_CUSTOMIZE_PRODUCT;
                 break;
             case "Donate":
-                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_DONATED;
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_DONATE;
                 break;
             case "FindLocation":
                 eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_FIND_LOCATION;
@@ -137,7 +137,7 @@ public class MetaSDKPlugin extends Plugin {
                 eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT;
                 break;
             case "Lead":
-                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_LEAD;
+                eventNameToLog = "Lead"; // EVENT_NAME_LEAD is removed in v17
                 break;
             case "Purchase":
                 eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_PURCHASED;

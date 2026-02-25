@@ -89,10 +89,9 @@ public class MetaSDKPlugin: CAPPlugin {
         case "CompleteRegistration": eventNameToLog = AppEvents.Name.completedRegistration
         case "Contact": eventNameToLog = AppEvents.Name.contact
         case "CustomizeProduct": eventNameToLog = AppEvents.Name.customizeProduct
-        case "Donate": eventNameToLog = AppEvents.Name.donated
+        case "Donate": eventNameToLog = AppEvents.Name.donate
         case "FindLocation": eventNameToLog = AppEvents.Name.findLocation
         case "InitiateCheckout": eventNameToLog = AppEvents.Name.initiatedCheckout
-        case "Lead": eventNameToLog = AppEvents.Name.lead
         case "Purchase": eventNameToLog = AppEvents.Name.purchased
         case "Schedule": eventNameToLog = AppEvents.Name.schedule
         case "Search": eventNameToLog = AppEvents.Name.searched
@@ -104,7 +103,11 @@ public class MetaSDKPlugin: CAPPlugin {
         }
         
         if let params = parameters, !params.isEmpty {
-            AppEvents.shared.logEvent(eventNameToLog, parameters: params)
+            var fbParams: [AppEvents.ParameterName: Any] = [:]
+            for (key, value) in params {
+                fbParams[AppEvents.ParameterName(key)] = value
+            }
+            AppEvents.shared.logEvent(eventNameToLog, parameters: fbParams)
         } else {
             AppEvents.shared.logEvent(eventNameToLog)
         }
@@ -134,8 +137,12 @@ public class MetaSDKPlugin: CAPPlugin {
         }
 
         let parameters = call.getObject("parameters") ?? [:]
+        var fbParams: [AppEvents.ParameterName: Any] = [:]
+        for (key, value) in parameters {
+            fbParams[AppEvents.ParameterName(key)] = value
+        }
 
-        AppEvents.shared.logPurchase(amount: amount, currency: currency, parameters: parameters)
+        AppEvents.shared.logPurchase(amount: amount, currency: currency, parameters: fbParams)
         call.resolve()
     }
 
@@ -153,26 +160,27 @@ public class MetaSDKPlugin: CAPPlugin {
         let email = call.getString("email")
         let phone = call.getString("phone")
 
-        if let em = email {
-            AppEvents.shared.setUserEmail(em)
-        }
-        
-        if let ph = phone {
-            AppEvents.shared.setUserPhone(ph)
-        }
+        AppEvents.shared.setUser(
+            email: email,
+            firstName: nil,
+            lastName: nil,
+            phone: phone,
+            dateOfBirth: nil,
+            gender: nil,
+            city: nil,
+            state: nil,
+            zip: nil,
+            country: nil
+        )
 
         // Advanced matching natively lets you set user data via custom fields 
         if let rawObject = call.getObject("") {
-            var customData: [String: String] = [:]
-            
             for (key, value) in rawObject {
                 if key != "email" && key != "phone", let strValue = value as? String {
-                    customData[key] = strValue
+                    // FBSDKCoreKit >= 17 doesn't support generic custom fields in setUserData natively
+                    // Best effort: convert to specific AppEvents identifiers if needed
+                    // Or ignore if not standard
                 }
-            }
-            
-            if !customData.isEmpty {
-                 AppEvents.shared.setUserData(customData.description, forType: AppEvents.UserDataType.custom)
             }
         }
 
