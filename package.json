@@ -1,6 +1,6 @@
 {
   "name": "@caplugins/capacitor-meta-sdk",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Capacitor plugin for Meta SDK integration",
   "main": "dist/plugin.cjs.js",
   "module": "dist/plugin.js",
