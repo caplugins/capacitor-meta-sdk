@@ -1,10 +1,10 @@
 {
   "name": "@caplugins/capacitor-meta-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Capacitor plugin for Meta SDK integration",
   "main": "dist/plugin.cjs.js",
-  "module": "dist/plugin.js",
-  "types": "dist/docs.d.ts",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "unpkg": "dist/plugin.js",
   "files": [
     "android/src/main/",
