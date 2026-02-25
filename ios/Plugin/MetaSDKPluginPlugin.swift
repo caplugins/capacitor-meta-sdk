@@ -2,7 +2,7 @@ import Foundation
 import Capacitor
 
 @objc(MetaSDKPluginPlugin)
-public class MetaSDKPluginPlugin: CAPPlugin, CAPBridgedPlugin {
+public class MetaSDKPluginPlugin: MetaSDKPlugin, CAPBridgedPlugin {
     public let identifier = "MetaSDKPluginPlugin"
     public let jsName = "MetaSDK"
     public let pluginMethods: [CAPPluginMethod] = [
