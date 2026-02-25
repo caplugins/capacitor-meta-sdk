@@ -271,4 +271,32 @@ public class MetaSDKPlugin extends Plugin {
 
         call.resolve();
     }
+
+    @PluginMethod
+    public void setAutoLogAppEventsEnabled(PluginCall call) {
+        if (isDisabled) {
+            call.resolve();
+            return;
+        }
+        Boolean enabled = call.getBoolean("enabled", true);
+        FacebookSdk.setAutoLogAppEventsEnabled(enabled);
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void setAdvertiserTrackingEnabled(PluginCall call) {
+        // No-op on Android, primarily an iOS App Tracking Transparency feature.
+        call.resolve();
+    }
+
+    @PluginMethod
+    public void setAdvertiserIDCollectionEnabled(PluginCall call) {
+        if (isDisabled) {
+            call.resolve();
+            return;
+        }
+        Boolean enabled = call.getBoolean("enabled", true);
+        FacebookSdk.setAdvertiserIDCollectionEnabled(enabled);
+        call.resolve();
+    }
 }

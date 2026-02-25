@@ -9,6 +9,9 @@ public class MetaSDKPluginPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "initialize", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "logEvent", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "logPurchase", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "setUserData", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "setUserData", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setAutoLogAppEventsEnabled", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setAdvertiserTrackingEnabled", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setAdvertiserIDCollectionEnabled", returnType: CAPPluginReturnPromise)
     ]
 }

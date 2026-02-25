@@ -148,4 +148,19 @@ export class MetaSDKWeb extends WebPlugin implements MetaSDKPlugin {
     // In raw FBQ, user data can be pushed as a 3rd arg to init: fbq('init', '{pixel-id}', {em: 'xxx'})
     // Without re-initializing, it's safer to just log that the user should pass it at init on the web.
   }
+
+  async setAutoLogAppEventsEnabled(_options: { enabled: boolean }): Promise<void> {
+    // No-op for web. FBQ relies on standard web pixel configuration and cookies.
+    if (this.isDisabled) return;
+  }
+
+  async setAdvertiserTrackingEnabled(_options: { enabled: boolean }): Promise<void> {
+    // No-op for web. Relevant mostly for iOS ATT.
+    if (this.isDisabled) return;
+  }
+
+  async setAdvertiserIDCollectionEnabled(_options: { enabled: boolean }): Promise<void> {
+    // No-op for web.
+    if (this.isDisabled) return;
+  }
 }

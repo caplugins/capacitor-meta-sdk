@@ -26,4 +26,13 @@ export declare class MetaSDKWeb extends WebPlugin implements MetaSDKPlugin {
         phone?: string;
         [key: string]: string | undefined;
     }): Promise<void>;
+    setAutoLogAppEventsEnabled(_options: {
+        enabled: boolean;
+    }): Promise<void>;
+    setAdvertiserTrackingEnabled(_options: {
+        enabled: boolean;
+    }): Promise<void>;
+    setAdvertiserIDCollectionEnabled(_options: {
+        enabled: boolean;
+    }): Promise<void>;
 }

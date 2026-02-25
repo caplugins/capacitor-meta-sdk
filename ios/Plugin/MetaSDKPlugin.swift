@@ -162,7 +162,6 @@ public class MetaSDKPlugin: CAPPlugin {
         }
 
         // Advanced matching natively lets you set user data via custom fields 
-        // usually passed in standard hashing keys. FBSDK handles standard keys.
         if let rawObject = call.getObject("") {
             var customData: [String: String] = [:]
             
@@ -177,6 +176,36 @@ public class MetaSDKPlugin: CAPPlugin {
             }
         }
 
+        call.resolve()
+    }
+
+    @objc func setAutoLogAppEventsEnabled(_ call: CAPPluginCall) {
+        if disabledPlatforms.contains("ios") {
+            call.resolve()
+            return
+        }
+        let enabled = call.getBool("enabled", true)
+        Settings.shared.isAutoLogAppEventsEnabled = enabled
+        call.resolve()
+    }
+
+    @objc func setAdvertiserTrackingEnabled(_ call: CAPPluginCall) {
+        if disabledPlatforms.contains("ios") {
+            call.resolve()
+            return
+        }
+        let enabled = call.getBool("enabled", true)
+        Settings.shared.isAdvertiserTrackingEnabled = enabled
+        call.resolve()
+    }
+
+    @objc func setAdvertiserIDCollectionEnabled(_ call: CAPPluginCall) {
+        if disabledPlatforms.contains("ios") {
+            call.resolve()
+            return
+        }
+        let enabled = call.getBool("enabled", true)
+        Settings.shared.isAdvertiserIDCollectionEnabled = enabled
         call.resolve()
     }
 }
