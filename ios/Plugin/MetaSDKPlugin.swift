@@ -78,7 +78,7 @@ public class MetaSDKPlugin: CAPPlugin {
             return
         }
 
-        let parameters = call.getObject("parameters") ?? [:]
+        let parameters = call.getObject("parameters") as? [String: Any]
 
         var eventNameToLog = AppEvents.Name(name)
 
@@ -103,7 +103,12 @@ public class MetaSDKPlugin: CAPPlugin {
         default: break
         }
         
-        AppEvents.shared.logEvent(eventNameToLog, parameters: parameters)
+        if let params = parameters, !params.isEmpty {
+            AppEvents.shared.logEvent(eventNameToLog, parameters: params)
+        } else {
+            AppEvents.shared.logEvent(eventNameToLog)
+        }
+        
         call.resolve()
     }
 
@@ -158,17 +163,18 @@ public class MetaSDKPlugin: CAPPlugin {
 
         // Advanced matching natively lets you set user data via custom fields 
         // usually passed in standard hashing keys. FBSDK handles standard keys.
-        let rawObject = call.getObject("") ?? [:]
-        var customData: [String: String] = [:]
-        
-        for (key, value) in rawObject {
-            if key != "email" && key != "phone", let strValue = value as? String {
-                customData[key] = strValue
+        if let rawObject = call.getObject("") {
+            var customData: [String: String] = [:]
+            
+            for (key, value) in rawObject {
+                if key != "email" && key != "phone", let strValue = value as? String {
+                    customData[key] = strValue
+                }
             }
-        }
-        
-        if !customData.isEmpty {
-             AppEvents.shared.setUserData(customData.description, forType: AppEvents.UserDataType.custom)
+            
+            if !customData.isEmpty {
+                 AppEvents.shared.setUserData(customData.description, forType: AppEvents.UserDataType.custom)
+            }
         }
 
         call.resolve()

@@ -90,17 +90,20 @@ public class MetaSDKPlugin extends Plugin {
             return;
         }
 
-        JSObject parameters = call.getObject("parameters", new JSObject());
-        Bundle bundle = new Bundle();
+        JSObject parameters = call.getObject("parameters");
+        Bundle bundle = null;
 
-        try {
-            Iterator<String> keys = parameters.keys();
-            while (keys.hasNext()) {
-                String key = keys.next();
-                bundle.putString(key, parameters.getString(key));
+        if (parameters != null && parameters.length() > 0) {
+            bundle = new Bundle();
+            try {
+                Iterator<String> keys = parameters.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    bundle.putString(key, parameters.getString(key));
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to parse parameters for logEvent: " + e.getMessage());
             }
-        } catch (Exception e) {
-            Log.w(TAG, "Failed to parse parameters for logEvent: " + e.getMessage());
         }
 
         String eventNameToLog = name;
@@ -187,17 +190,20 @@ public class MetaSDKPlugin extends Plugin {
             return;
         }
 
-        JSObject parameters = call.getObject("parameters", new JSObject());
-        Bundle bundle = new Bundle();
+        JSObject parameters = call.getObject("parameters");
+        Bundle bundle = null;
 
-        try {
-            Iterator<String> keys = parameters.keys();
-            while (keys.hasNext()) {
-                String key = keys.next();
-                bundle.putString(key, parameters.getString(key));
+        if (parameters != null && parameters.length() > 0) {
+            bundle = new Bundle();
+            try {
+                Iterator<String> keys = parameters.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    bundle.putString(key, parameters.getString(key));
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to parse parameters for logPurchase: " + e.getMessage());
             }
-        } catch (Exception e) {
-            Log.w(TAG, "Failed to parse parameters for logPurchase: " + e.getMessage());
         }
 
         try {
