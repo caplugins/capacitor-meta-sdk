@@ -79,4 +79,26 @@ export interface MetaSDKPlugin {
         phone?: string;
         [key: string]: string | undefined;
     }): Promise<void>;
+    /**
+     * Enable or disable automatic event logging.
+     * On iOS and Android, this corresponds to the `AutoLogAppEventsEnabled` setting.
+     */
+    setAutoLogAppEventsEnabled(options: {
+        enabled: boolean;
+    }): Promise<void>;
+    /**
+     * Enable or disable advertiser tracking.
+     * On iOS, this should be called after handling the App Tracking Transparency (ATT) prompt.
+     * This is a no-op on Android and Web platforms.
+     */
+    setAdvertiserTrackingEnabled(options: {
+        enabled: boolean;
+    }): Promise<void>;
+    /**
+     * Enable or disable advertiser ID collection.
+     * On iOS and Android, this corresponds to the `AdvertiserIDCollectionEnabled` setting.
+     */
+    setAdvertiserIDCollectionEnabled(options: {
+        enabled: boolean;
+    }): Promise<void>;
 }
