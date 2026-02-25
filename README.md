@@ -67,22 +67,37 @@ This project includes fully configured GitHub Actions workflows for continuous i
 
 ## API Usage
 
-1. **Initialization:**
-   Call this as early as possible in your app lifecycle. You can optionally disable tracking on certain platforms (e.g., when running in a local web browser simulator that blocks scripts).
+### 1. App Tracking Transparency (iOS Only)
+
+Apple requires applications to request permission before tracking users across apps and websites. In order to pass the correct Advertiser Tracking Enabled (ATE) flag to the Meta SDK, you must request tracking permission _before_ initializing the SDK.
+
+You can use the community plugin `@capacitor-community/app-tracking-transparency` for this:
 
 ```typescript
+import { AppTrackingTransparency } from '@capacitor-community/app-tracking-transparency';
 import { MetaSDK } from '@caplugins/capacitor-meta-sdk';
+import { Capacitor } from '@capacitor/core';
 
-// Initialize the SDK
-await MetaSDK.initialize({
-  appId: process.env.VITE_META_APP_ID, // Use environment variables!
-  clientToken: process.env.VITE_META_CLIENT_TOKEN,
-  disabledPlatforms: ['web'], // Disable the web pixel if desired
-  debug: true,
-});
+async function requestTrackingAndInitialize() {
+  if (Capacitor.getPlatform() === 'ios') {
+    const { status } = await AppTrackingTransparency.requestPermission();
+    // Enable advertiser tracking if the user authorized it
+    await MetaSDK.setAdvertiserTrackingEnabled({ enabled: status === 'authorized' });
+  }
+
+  // Then initialize the Meta SDK
+  await MetaSDK.initialize({
+    appId: process.env.VITE_META_APP_ID, // Use environment variables!
+    clientToken: process.env.VITE_META_CLIENT_TOKEN,
+    disabledPlatforms: ['web'], // Disable the web pixel if desired
+    debug: true,
+  });
+}
 ```
 
-2. **Logging Standard Events:**
+> **Note:** `setAdvertiserTrackingEnabled` is a safe no-op on Android and Web, so you can call it unconditionally if preferred.
+
+### 2. Logging Standard Events:
 
 ```typescript
 await MetaSDK.logEvent({
