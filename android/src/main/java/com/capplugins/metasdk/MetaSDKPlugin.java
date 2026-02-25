@@ -103,7 +103,63 @@ public class MetaSDKPlugin extends Plugin {
             Log.w(TAG, "Failed to parse parameters for logEvent: " + e.getMessage());
         }
 
-        logger.logEvent(name, bundle);
+        String eventNameToLog = name;
+
+        switch (name) {
+            case "AddPaymentInfo":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_ADDED_PAYMENT_INFO;
+                break;
+            case "AddToCart":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_ADDED_TO_CART;
+                break;
+            case "AddToWishlist":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_ADDED_TO_WISHLIST;
+                break;
+            case "CompleteRegistration":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION;
+                break;
+            case "Contact":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_CONTACT;
+                break;
+            case "CustomizeProduct":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_CUSTOMIZE_PRODUCT;
+                break;
+            case "Donate":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_DONATED;
+                break;
+            case "FindLocation":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_FIND_LOCATION;
+                break;
+            case "InitiateCheckout":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT;
+                break;
+            case "Lead":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_LEAD;
+                break;
+            case "Purchase":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_PURCHASED;
+                break;
+            case "Schedule":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_SCHEDULE;
+                break;
+            case "Search":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_SEARCHED;
+                break;
+            case "StartTrial":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_START_TRIAL;
+                break;
+            case "SubmitApplication":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION;
+                break;
+            case "Subscribe":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_SUBSCRIBE;
+                break;
+            case "ViewContent":
+                eventNameToLog = com.facebook.appevents.AppEventsConstants.EVENT_NAME_VIEWED_CONTENT;
+                break;
+        }
+
+        logger.logEvent(eventNameToLog, bundle);
         call.resolve();
     }
 

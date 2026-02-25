@@ -31,6 +31,28 @@ export interface MetaSDKInitOptions {
   debug?: boolean;
 }
 /**
+ * Standard Events recognized by the Meta Pixel and App Events SDK.
+ * Passing any of these strings to `logEvent` triggers standard mapping natively.
+ */
+export type MetaStandardEvent =
+  | 'AddPaymentInfo'
+  | 'AddToCart'
+  | 'AddToWishlist'
+  | 'CompleteRegistration'
+  | 'Contact'
+  | 'CustomizeProduct'
+  | 'Donate'
+  | 'FindLocation'
+  | 'InitiateCheckout'
+  | 'Lead'
+  | 'Purchase'
+  | 'Schedule'
+  | 'Search'
+  | 'StartTrial'
+  | 'SubmitApplication'
+  | 'Subscribe'
+  | 'ViewContent';
+/**
  * The standard interface for the MetaSDK plugin.
  */
 export interface MetaSDKPlugin {
@@ -48,7 +70,7 @@ export interface MetaSDKPlugin {
    * @param options The event name and optional payload of parameters.
    * @returns Promise that resolves when the event has been dispatched.
    */
-  logEvent(options: { name: string; parameters?: Record<string, any> }): Promise<void>;
+  logEvent(options: { name: MetaStandardEvent | string; parameters?: Record<string, any> }): Promise<void>;
   /**
    * Log a purchase event to Meta.
    *

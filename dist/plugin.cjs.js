@@ -72,10 +72,30 @@ class MetaSDKWeb extends core.WebPlugin {
       console.warn('[MetaSDK] logEvent called before initialization or fbq is blocked.');
       return;
     }
-    // 'track' is generally for standard events, 'trackCustom' for custom ones.
-    // For simplicity a heuristical check could be used, but trackCustom is safe for all ad-hoc events.
-    // We will default to trackCustom to ensure it logs properly.
-    this.fbq('trackCustom', options.name, options.parameters || {});
+    const META_STANDARD_EVENTS = new Set([
+      'AddPaymentInfo',
+      'AddToCart',
+      'AddToWishlist',
+      'CompleteRegistration',
+      'Contact',
+      'CustomizeProduct',
+      'Donate',
+      'FindLocation',
+      'InitiateCheckout',
+      'Lead',
+      'Purchase',
+      'Schedule',
+      'Search',
+      'StartTrial',
+      'SubmitApplication',
+      'Subscribe',
+      'ViewContent',
+    ]);
+    if (META_STANDARD_EVENTS.has(options.name)) {
+      this.fbq('track', options.name, options.parameters || {});
+    } else {
+      this.fbq('trackCustom', options.name, options.parameters || {});
+    }
   }
   async logPurchase(options) {
     if (this.isDisabled) return;

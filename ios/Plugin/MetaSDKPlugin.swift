@@ -79,8 +79,31 @@ public class MetaSDKPlugin: CAPPlugin {
         }
 
         let parameters = call.getObject("parameters") ?? [:]
+
+        var eventNameToLog = AppEvents.Name(name)
+
+        switch name {
+        case "AddPaymentInfo": eventNameToLog = AppEvents.Name.addedPaymentInfo
+        case "AddToCart": eventNameToLog = AppEvents.Name.addedToCart
+        case "AddToWishlist": eventNameToLog = AppEvents.Name.addedToWishlist
+        case "CompleteRegistration": eventNameToLog = AppEvents.Name.completedRegistration
+        case "Contact": eventNameToLog = AppEvents.Name.contact
+        case "CustomizeProduct": eventNameToLog = AppEvents.Name.customizeProduct
+        case "Donate": eventNameToLog = AppEvents.Name.donated
+        case "FindLocation": eventNameToLog = AppEvents.Name.findLocation
+        case "InitiateCheckout": eventNameToLog = AppEvents.Name.initiatedCheckout
+        case "Lead": eventNameToLog = AppEvents.Name.lead
+        case "Purchase": eventNameToLog = AppEvents.Name.purchased
+        case "Schedule": eventNameToLog = AppEvents.Name.schedule
+        case "Search": eventNameToLog = AppEvents.Name.searched
+        case "StartTrial": eventNameToLog = AppEvents.Name.startTrial
+        case "SubmitApplication": eventNameToLog = AppEvents.Name.submitApplication
+        case "Subscribe": eventNameToLog = AppEvents.Name.subscribe
+        case "ViewContent": eventNameToLog = AppEvents.Name.viewedContent
+        default: break
+        }
         
-        AppEvents.shared.logEvent(AppEvents.Name(name), parameters: parameters)
+        AppEvents.shared.logEvent(eventNameToLog, parameters: parameters)
         call.resolve()
     }
 
