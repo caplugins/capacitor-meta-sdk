@@ -1,6 +1,6 @@
 {
   "name": "@caplugins/capacitor-meta-sdk",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Capacitor plugin for Meta SDK integration",
   "main": "dist/plugin.cjs",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "CapacitorMetaSdk.podspec"
+    "CapluginsCapacitorMetaSdk.podspec"
   ],
   "author": "Vish <hello@iamvishnu.dev>",
   "license": "MIT",
