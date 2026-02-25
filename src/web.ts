@@ -1,6 +1,26 @@
 import { WebPlugin } from '@capacitor/core';
 import type { MetaSDKInitOptions, MetaSDKPlugin } from './definitions';
 
+const META_STANDARD_EVENTS = new Set([
+  'AddPaymentInfo',
+  'AddToCart',
+  'AddToWishlist',
+  'CompleteRegistration',
+  'Contact',
+  'CustomizeProduct',
+  'Donate',
+  'FindLocation',
+  'InitiateCheckout',
+  'Lead',
+  'Purchase',
+  'Schedule',
+  'Search',
+  'StartTrial',
+  'SubmitApplication',
+  'Subscribe',
+  'ViewContent',
+]);
+
 /**
  * Web implementation of the Meta SDK.
  * This injects the Meta Pixel (fbevents.js) into the DOM and bridges the App Event calls to fbq().
@@ -68,26 +88,6 @@ export class MetaSDKWeb extends WebPlugin implements MetaSDKPlugin {
       console.warn('[MetaSDK] logEvent called before initialization or fbq is blocked.');
       return;
     }
-
-    const META_STANDARD_EVENTS = new Set([
-      'AddPaymentInfo',
-      'AddToCart',
-      'AddToWishlist',
-      'CompleteRegistration',
-      'Contact',
-      'CustomizeProduct',
-      'Donate',
-      'FindLocation',
-      'InitiateCheckout',
-      'Lead',
-      'Purchase',
-      'Schedule',
-      'Search',
-      'StartTrial',
-      'SubmitApplication',
-      'Subscribe',
-      'ViewContent',
-    ]);
 
     if (META_STANDARD_EVENTS.has(options.name)) {
       this.fbq('track', options.name, options.parameters || {});
