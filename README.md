@@ -1,11 +1,11 @@
-# @capplugins/capacitor-meta-sdk
+# @caplugins/capacitor-meta-sdk
 
 Capacitor plugin for Meta SDK integration. Fully typesafe, modular, and designed to support standard App Events, Purchases, and Advanced Matching via the Conversions API.
 
 ## Install
 
 ```bash
-npm install @capplugins/capacitor-meta-sdk
+npm install @caplugins/capacitor-meta-sdk
 npx cap sync
 ```
 
@@ -71,7 +71,7 @@ This project includes fully configured GitHub Actions workflows for continuous i
    Call this as early as possible in your app lifecycle. You can optionally disable tracking on certain platforms (e.g., when running in a local web browser simulator that blocks scripts).
 
 ```typescript
-import { MetaSDK } from '@capplugins/capacitor-meta-sdk';
+import { MetaSDK } from '@caplugins/capacitor-meta-sdk';
 
 // Initialize the SDK
 await MetaSDK.initialize({

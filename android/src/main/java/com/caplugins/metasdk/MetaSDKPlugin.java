@@ -1,4 +1,4 @@
-package com.capplugins.metasdk;
+package com.caplugins.metasdk;
 
 import android.os.Bundle;
 import android.util.Log;

@@ -13,7 +13,7 @@
     "ios/Plugin/",
     "CapacitorMetaSdk.podspec"
   ],
-  "author": "CapPlugins",
+  "author": "Vish <hello@iamvishnu.dev>",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains `@capplugins/capacitor-meta-sdk`, a Capacitor plugin bridging the Meta (Facebook) SDK across iOS, Android, and Web platforms.
+This repository contains `@caplugins/capacitor-meta-sdk`, a Capacitor plugin bridging the Meta (Facebook) SDK across iOS, Android, and Web platforms.
 
 The primary goals of this project are:
 
