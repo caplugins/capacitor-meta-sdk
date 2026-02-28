@@ -39,6 +39,15 @@ However, if you want Facebook to auto-initialize or if you use deep linking, add
 
 _Note: You can use `xcconfig` files to inject these `[YOUR_APP_ID]` values via CI/CD environment variables._
 
+#### Privacy Manifest (`PrivacyInfo.xcprivacy`)
+
+Starting in Spring 2024, Apple requires third-party SDKs to include a privacy manifest. 
+
+The `FBSDKCoreKit` (which this plugin wraps) **already includes its own `PrivacyInfo.xcprivacy` file** starting from version `17.0.0`. This manifest declares the data types the SDK collects by default and its tracking domains.
+
+**What you need to do:**
+You do *not* need to manually copy Facebook's tracking domains into your app's privacy manifest (doing so may actually disrupt functionality). However, you **must** still ensure your app's own `ios/App/PrivacyInfo.xcprivacy` file accurately reflects any *additional* data you choose to send to Meta (e.g., specific custom events, user data for Advanced Matching) and your overall app's tracking practices.
+
 ### Android
 
 In your `android/app/src/main/AndroidManifest.xml`, add the following inside the `<application>` tag:
